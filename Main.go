@@ -1,13 +1,10 @@
 package main
-
+ 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"gopkg.in/go-playground/validator.v9"
-
 	"github.com/codedevstem/go-fireauth-login-server/register"
+	"github.com/codedevstem/go-fireauth-login-server/login"
 )
 
 const port = ":13300"
@@ -18,15 +15,10 @@ type LoginUser struct {
 	Password string `json:"password" validate:"required,min=8"`
 }
 
-
-func logoutHandler(writer http.ResponseWriter, request *http.Request) {
-
-}
-
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/login", loginHandler)
+	mux.HandleFunc("/login", login.Handler)
 	mux.HandleFunc("/register", register.Handler)
 	mux.HandleFunc("/logout", logoutHandler)
 
